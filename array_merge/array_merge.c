@@ -17,4 +17,26 @@
   return binaryArray;
 }
 
+int* array_merge(int num_arrays, int* sizes, int** values) {
+  int* binaryArray;
+  binaryArray = (int*) calloc(11, sizeof(int));
+  binaryArray = is_unique(num_arrays, sizes, values, binaryArray);
+  int unique_values = binaryArray[10];
+  int* mergedArray;
+  // int mergedArray[unique_values + 1];
+   mergedArray = (int*) calloc(unique_values + 1, sizeof(int));
+  int mergeArrayIndex = 1;
+  for (int i = 0; i < 10; i++) {
+    if(binaryArray[i] == 1) {
+      mergedArray[mergeArrayIndex] = i;
+      mergeArrayIndex++;
+    }
+  }
+  free(binaryArray);
+  // The first index lists the number of unique values
+  mergedArray[0] = unique_values;  
+  return mergedArray;
+}
+
+
 
