@@ -1,5 +1,9 @@
 #include "mergesort.h"
 
+bool needs_sorting(int rangeSize) {
+  return rangeSize >= 2;
+}
+
 void merge_ranges(int *values, int midPoint, int startIndex, int endIndex) {
   int rangeSize = endIndex - startIndex;
   int *destination;
@@ -34,7 +38,7 @@ void merge_ranges(int *values, int midPoint, int startIndex, int endIndex) {
 
 void mergesort_range(int *values, int startIndex, int endIndex) {
   int rangeSize = endIndex - startIndex;
-  if (needsSorting(rangeSize)) {
+  if (needs_sorting(rangeSize)) {
     int midPoint = (startIndex + endIndex)/2;
     mergesort_range(values, startIndex, midPoint);
     mergesort_range(values, midPoint, endIndex);
