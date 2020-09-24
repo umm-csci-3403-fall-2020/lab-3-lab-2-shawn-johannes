@@ -24,7 +24,7 @@ int* array_merge(int num_arrays, int* sizes, int** values) {
   int unique_values = binaryArray[10];
   int* mergedArray;
   // int mergedArray[unique_values + 1];
-   mergedArray = (int*) calloc(unique_values + 1, sizeof(int));
+   mergedArray = (int*) calloc(unique_values, sizeof(int));
   int mergeArrayIndex = 1;
   for (int i = 0; i < 10; i++) {
     if(binaryArray[i] == 1) {
