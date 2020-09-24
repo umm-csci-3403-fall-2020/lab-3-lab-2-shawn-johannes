@@ -1,13 +1,44 @@
 #include "mergesort.h"
 
+void merge_ranges(int *values, int midPoint, int startIndex, int endIndex) {
+  int rangeSize = endIndex - startIndex;
+  int *destination;
+  destination = (int*) calloc(rangeSize, sizeof(int));
+  int firstIndex = startIndex;
+  int secondIndex = midPoint;
+  int copyIndex = 0;
+  while (firstIndex < midPoint && secondIndex < endIndex) {
+    if (values[firstIndex] < values[secondIndex]) {
+      destination[copyIndex] = values[firstIndex];
+      firstIndex++;
+    } else {
+      destination[copyIndex] = values[secondIndex];
+      secondIndex++;
+    }
+    copyIndex++;
+  }
+  while (firstIndex < midPoint) {
+    destination[copyIndex] = values[firstIndex];
+    copyIndex++;
+    secondIndex++;
+  }
+  while (secondIndex < endIndex) {
+   destination[copyIndex] = values[secondIndex];
+   copyIndex++;
+   secondIndex++;
+  }
+  for (int i = 0; i < rangeSize; i++) {
+    values[i + startIndex] = destination[i];
+  }
+}
 
-void mergesort_Range(int *values, int startIndex, int endIndex) {
+void mergesort_range(int *values, int startIndex, int endIndex) {
   int rangeSize = endIndex - startIndex;
   if (needsSorting(rangeSize)) {
     int midPoint = (startIndex + endIndex)/2;
-    mergesort_Range(values, startIndex, midPoint);
-    mergesort_Range(values, midPoint, endIndex);
-    merge_Ranges(values, startIndex, midPoint, endIndex);
+    mergesort_range(values, startIndex, midPoint);
+    mergesort_range(values, midPoint, endIndex);
+    merge_ranges(values, startIndex, midPoint, endIndex);
   }
 }
 
